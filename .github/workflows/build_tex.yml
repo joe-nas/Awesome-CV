@@ -8,13 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT }}
-          repository: joe-nas/Awesome-CV
-        #     repository: joe-nas/cv_automation
-
+      # - name: Checkout joe-nas/Awesome-CV
+      #   uses: actions/checkout@v4
+      #   with:
+      #     token: ${{ secrets.PAT }}
+      #     repository: joe-nas/Awesome-CV
+      #     repository: joe-nas/cv_automation
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -24,9 +23,7 @@ jobs:
         run: pip install jinja2
       
       - name: Run json_to_tex.py
-        run: |
-          cd ~/Awesome-CV
-          python json_to_tex.py
+        run: python json_to_tex.py
         
       # - name: Move .tex to examples/cv
       #   run: mv output/*.tex examples/cv/

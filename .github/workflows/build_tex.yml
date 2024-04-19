@@ -1,0 +1,16 @@
+name: Compile PDFs
+
+on:
+  push: repository_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          repository: joe-nas/cv_automation
+          token: ${{ secrets.PAT }}
+      - run: pip install -r jinja2
+      - run: python json_to_pdf.py

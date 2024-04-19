@@ -25,3 +25,9 @@ examples/coverletter.pdf
 examples/cv.pdf
 examples/resume.pdf
 *.pdf
+
+# data to be pulled from joe-nas/cv_automation
+/data
+
+# temp
+/output

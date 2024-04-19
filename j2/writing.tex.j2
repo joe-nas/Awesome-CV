@@ -1,0 +1,26 @@
+%-------------------------------------------------------------------------------
+%	SECTION TITLE
+%-------------------------------------------------------------------------------
+\cvsection{Writing}
+
+
+%-------------------------------------------------------------------------------
+%	CONTENT
+%-------------------------------------------------------------------------------
+\begin{cventries}
+
+{% for entry in data -%}
+\cventry
+  { {{entry.sub_title}} }
+  { {{entry.title}} } % Role
+  { {{entry.location}} }
+  { {{entry.date}}, {{entry.location}} } % Date(s)
+  {    
+  \begin{cvitems} % Description(s) of experience/contributions/knowledge
+    \item {Available here: {{entry.link}} }
+  \end{cvitems}
+  }
+{% endfor %}
+
+%---------------------------------------------------------
+\end{cventries}

@@ -1,7 +1,8 @@
-name: on_repository_dispatch
+name: Receive Dispatch Event
 
 on:
   repository_dispatch:
+    types: [data-changed]
 
 jobs:
   build:
@@ -12,5 +13,7 @@ jobs:
         with:
           repository: joe-nas/cv_automation
           token: ${{ secrets.PAT }}
-      - run: pip install -r jinja2
-      - run: python json_to_pdf.py
+      
+      - name: Set up Python
+        run: pip install -r jinja2
+             python json_to_pdf.py

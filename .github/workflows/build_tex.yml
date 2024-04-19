@@ -24,7 +24,8 @@ jobs:
       
       - name: Run json_to_tex.py
         run: |
-          cd ..
+          ls -lsa
+          echo $PWD
           python json_to_tex.py
         
       # - name: Move .tex to examples/cv

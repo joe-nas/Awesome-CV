@@ -8,11 +8,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout repo
-      #   uses: actions/checkout@v4
-      #   with:
-      #     token: ${{ secrets.PAT }}
-      #     repository: joe-nas/cv_automation
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          repository: joe-nas/Awesome-CV
+        #     repository: joe-nas/cv_automation
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:

@@ -25,7 +25,7 @@ jobs:
         #   run: mv output/*.tex examples/cv/
         
       - name: ls directory
-        run: ls
+        run: echo $(ls)
   
       - name: Run json_to_tex.py
         run: python json_to_tex.py

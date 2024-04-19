@@ -26,3 +26,6 @@ jobs:
       
       - name: Move .tex to examples/cv
         run: mv output/*.tex examples/cv/
+      
+      - name: ls directory
+        run: ls

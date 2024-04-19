@@ -23,4 +23,4 @@ jobs:
         run: pip install jinja2
   
       - name: Run script
-        run: python json_to_pdf.py
+        run: python json_to_tex.py

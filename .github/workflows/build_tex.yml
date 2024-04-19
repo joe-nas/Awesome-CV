@@ -15,5 +15,12 @@ jobs:
           repository: joe-nas/cv_automation
       
       - name: Set up Python
-        run: pip install -r jinja2
-             python json_to_pdf.py
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12.2
+  
+      - name: Install dependencies
+        run: pip install jinja2
+  
+      - name: Run script
+        run: python json_to_pdf.py

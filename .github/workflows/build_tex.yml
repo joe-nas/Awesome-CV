@@ -20,12 +20,12 @@ jobs:
   
       - name: Install dependencies
         run: pip install jinja2
-  
-      # - name: Run json_to_tex.py
-      #   run: python json_to_tex.py
-      
-      # - name: Move .tex to examples/cv
-      #   run: mv output/*.tex examples/cv/
-      
+          
+        # - name: Move .tex to examples/cv
+        #   run: mv output/*.tex examples/cv/
+        
       - name: ls directory
         run: ls
+  
+      - name: Run json_to_tex.py
+        run: python json_to_tex.py

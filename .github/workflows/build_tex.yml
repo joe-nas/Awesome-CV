@@ -8,12 +8,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout joe-nas/Awesome-CV
-      #   uses: actions/checkout@v4
-      #   with:
-      #     token: ${{ secrets.PAT }}
-      #     repository: joe-nas/Awesome-CV
-      #     repository: joe-nas/cv_automation
+      - name: Checkout joe-nas/Awesome-CV
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          repository: joe-nas/Awesome-CV
+
+      - name: Checkout joe-nas/cv_automation
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          repository: joe-nas/cv_automation
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -24,8 +30,7 @@ jobs:
       
       - name: Run json_to_tex.py
         run: |
-          ls -lsa
-          echo $PWD
+          echo "HALLO"
           python json_to_tex.py
         
       # - name: Move .tex to examples/cv

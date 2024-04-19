@@ -1,4 +1,4 @@
-name: Receive Dispatch Event
+name: Receive Dispatch
 
 on:
   repository_dispatch:

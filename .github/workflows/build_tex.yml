@@ -40,5 +40,5 @@ jobs:
           echo 🎃🎃executed json_to_tex🎃🎃
           mv output/*.tex examples/cv
           ls -la examples
-          chmod -R a+w examples
+          chmod -R a+w .
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make

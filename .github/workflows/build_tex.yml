@@ -5,13 +5,13 @@ on:
     types: [data-changed]
 
 jobs:
-  build:
+  setup-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout joe-nas/Awesome-CV
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # github or community actions/ @ is not limited to releases but could be a branch or a commit or tag
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
           repository: joe-nas/Awesome-CV
           path: Awesome-CV
 
@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.12.2
+          cache: pip
   
       - name: Install dependencies
         run: pip install jinja2
@@ -42,3 +43,4 @@ jobs:
           ls -la examples
           chmod -R 777 .
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
+          echo '${{ toJSON(github.event) }}'

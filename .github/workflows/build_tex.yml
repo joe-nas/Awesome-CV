@@ -53,5 +53,4 @@ jobs:
         with:
           target: test.txt
           credentials: ${{ secrets.GOOGLE_DRIVE }}
-          owner: pintac1984@gmail.com
           parent_folder_id: 1cAeEVmdYS5AndadJBwQTvwI7DMic0Blm

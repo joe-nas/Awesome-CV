@@ -49,8 +49,12 @@ jobs:
         run: echo "Hello World" > test.txt
 
       - name: Upload to Google Drive
-        uses: willo32/google-drive-upload-action@v1
+        # uses: willo32/google-drive-upload-action@v1
+        uses: adityak74/google-drive-upload-git-action@main
         with:
-          target: test.txt
+          # target: test.txt
+          filename: test.txt
           credentials: ${{ secrets.GOOGLE_DRIVE }}
-          parent_folder_id: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          overwrite: true
+          # parent_folder_id: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}

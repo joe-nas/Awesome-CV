@@ -46,7 +46,7 @@ jobs:
           # echo '${{ toJSON(github.event) }}'
 
       - name: Create Test File
-        run: echo ${{ github.event.client_payload.ref_name }} > test.txt
+        run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt
 
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main

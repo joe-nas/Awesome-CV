@@ -31,16 +31,26 @@ jobs:
       - name: Install dependencies
         run: pip install jinja2
       
-      - name: Run json_to_tex.py
-        run: |
-          echo 🎃🎃🎃🎃
-          # cp -r cv_automation/data Awesome-CV
-          cd Awesome-CV
-          mkdir output
-          # python json_to_tex.py
-          echo 🎃🎃executed json_to_tex🎃🎃
-          # mv output/*.tex examples/cv
-          ls -la examples
-          chmod -R 777 .
-          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
-          echo '${{ toJSON(github.event) }}'
+      # - name: Run json_to_tex.py
+        # run: |
+          # echo 🎃🎃🎃🎃
+          # # cp -r cv_automation/data Awesome-CV
+          # cd Awesome-CV
+          # mkdir output
+          # # python json_to_tex.py
+          # echo 🎃🎃executed json_to_tex🎃🎃
+          # # mv output/*.tex examples/cv
+          # ls -la examples
+          # chmod -R 777 .
+          # docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
+          # echo '${{ toJSON(github.event) }}'
+
+      - name: Create Test File
+        run: echo "Hello World" > test.txt
+
+      - name: Upload to Google Drive
+        uses: willo32/google-drive-upload-action@v1
+        with:
+          target: test.txt
+          credentials: ${{ secrets.GOOGLE_DRIVE }}
+          parent_folder_id: 1cAeEVmdYS5AndadJBwQTvwI7DMic0Blm

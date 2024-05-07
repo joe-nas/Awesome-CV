@@ -51,7 +51,7 @@ jobs:
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          filename: test.txt
+          filename: ${{ github.event.client_payload.ref_name }}.txt
           credentials: ${{ secrets.GOOGLE_DRIVE }}
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           overwrite: true

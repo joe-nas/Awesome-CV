@@ -21,7 +21,6 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: joe-nas/cv_automation
           path: cv_automation
-          ref: ${{ github.event.client_payload.ref }}
 
       # - name: Set up Python
       #   uses: actions/setup-python@v5
@@ -47,7 +46,7 @@ jobs:
           # echo '${{ toJSON(github.event) }}'
 
       - name: Create Test File
-        run: echo ${{ github.event.client_payload.ref }} > test.txt
+        run: echo ${{ github.event.client_payload.ref_name }} > test.txt
 
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main

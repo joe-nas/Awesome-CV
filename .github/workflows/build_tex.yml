@@ -23,7 +23,7 @@ jobs:
           path: cv_automation
   
       - name: Install python dependencies
-        run: pip install jinja2
+        run: pip install jinja2about:blank#blocked
 
       - name: build CV using docker image
         run: |
@@ -31,7 +31,11 @@ jobs:
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/docker-texlive-full make
 
       - name: copy cv.pdf to root
-        run: cp Awesome-CV/examples/cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf  
+        run: cp Awesome-CV/examples/cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf 
+
+      - name: copy coverletter.pdf to root
+        run: cp Awesome-CV/examples/coverletter.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_coverletter.pdf 
+  
 
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main

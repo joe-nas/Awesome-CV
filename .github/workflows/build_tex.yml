@@ -58,7 +58,7 @@ jobs:
         run: |
           cd Awesome-CV
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
-          cp examples/cv/cv.pdf ../../cv.pdf
+          cp examples/cv.pdf ../../cv.pdf
 
       - name: Create Test File
         run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt

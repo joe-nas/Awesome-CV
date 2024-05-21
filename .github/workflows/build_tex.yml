@@ -8,12 +8,20 @@ jobs:
   setup-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout joe-nas/Awesome-CV
+      # - name: Checkout joe-nas/Awesome-CV
+      #   uses: actions/checkout@v4 # github or community actions/ @ is not limited to releases but could be a branch or a commit or tag
+      #   with:
+      #     token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
+      #     repository: joe-nas/Awesome-CV
+      #     path: Awesome-CV
+
+      - name: Checkout posquit0/Awesome-CV
         uses: actions/checkout@v4 # github or community actions/ @ is not limited to releases but could be a branch or a commit or tag
         with:
-          token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
-          repository: joe-nas/Awesome-CV
+          # token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
+          repository: posquit0/Awesome-CV
           path: Awesome-CV
+          
 
       - name: Checkout joe-nas/cv_automation
         uses: actions/checkout@v4
@@ -31,6 +39,13 @@ jobs:
       - name: Install dependencies
         run: pip install jinja2
       
+      - name: build CV using docker image
+        run: |
+          ls -la
+          cd Awesome-CV
+          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
+          cp examples/cv.pdf ../../cv.pdf
+
       # - name: Run json_to_tex.py
         # run: |
           # echo 🎃🎃🎃🎃
@@ -38,20 +53,21 @@ jobs:
           # cd Awesome-CV
           # mkdir output
           # # python json_to_tex.py
-          # echo 🎃🎃executed json_to_tex🎃🎃
+          # echo 🎃🎃executed json_to_tex🎃🎃about:blank#blocked
           # # mv output/*.tex examples/cv
           # ls -la examples
           # chmod -R 777 .
           # docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
           # echo '${{ toJSON(github.event) }}'
 
-      - name: Create Test File
-        run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt
+      # - name: Create Test File
+      #   run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt
 
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          filename: ${{ github.event.client_payload.ref_name }}.txt
+          # filename: ${{ github.event.client_payload.ref_name }}.txt
+          filename: cv.pdf
           credentials: ${{ secrets.GOOGLE_DRIVE }}
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           overwrite: true

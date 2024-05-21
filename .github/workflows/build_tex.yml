@@ -30,10 +30,10 @@ jobs:
           cd Awesome-CV
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/docker-texlive-full make
 
-      - name: copy cv.pdf to root
+      - name: copy cv.pdf to root and rename to JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf
         run: cp Awesome-CV/examples/cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf 
 
-      - name: copy coverletter.pdf to root
+      - name: copy coverletter.pdf to root and rename to JonasFalck_${{ github.event.client_payload.ref_name }}_coverletter.pdf 
         run: cp Awesome-CV/examples/coverletter.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_coverletter.pdf 
   
 

@@ -39,6 +39,12 @@ jobs:
       - name: Install dependencies
         run: pip install jinja2
       
+      - name: build CV using docker image
+        run: |
+          ls -la
+          cd Awesome-CV
+          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
+          cp examples/cv.pdf ../../cv.pdf
 
       # - name: Run json_to_tex.py
         # run: |
@@ -54,14 +60,8 @@ jobs:
           # docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
           # echo '${{ toJSON(github.event) }}'
 
-      - name: build CV using docker image
-        run: |
-          cd Awesome-CV
-          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
-          cp examples/cv.pdf ../../cv.pdf
-
-      - name: Create Test File
-        run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt
+      # - name: Create Test File
+      #   run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt
 
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main

@@ -8,27 +8,19 @@ jobs:
   setup-build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout joe-nas/Awesome-CV
-      #   uses: actions/checkout@v4 # github or community actions/ @ is not limited to releases but could be a branch or a commit or tag
-      #   with:
-      #     token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
-      #     repository: joe-nas/Awesome-CV
-      #     path: Awesome-CV
-
-      - name: Checkout posquit0/Awesome-CV
+      - name: Checkout joe-nas/Awesome-CV
         uses: actions/checkout@v4 # github or community actions/ @ is not limited to releases but could be a branch or a commit or tag
         with:
-          # token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
-          repository: posquit0/Awesome-CV
+          token: ${{ secrets.PAT }} # secrets github context / besides secrets there more contexts: https://docs.github.com/en/actions/learn-github-actions/contexts
+          repository: joe-nas/Awesome-CV
           path: Awesome-CV
-          
 
-      # - name: Checkout joe-nas/cv_automation
-      #   uses: actions/checkout@v4
-      #   with:
-      #     token: ${{ secrets.PAT }}
-      #     repository: joe-nas/cv_automation
-      #     path: cv_automation
+      - name: Checkout joe-nas/cv_automation
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          repository: joe-nas/cv_automation
+          path: cv_automation
 
       # - name: Set up Python
       #   uses: actions/setup-python@v5
@@ -36,8 +28,8 @@ jobs:
       #     python-version: 3.12.2
       #     cache: pip
   
-      # - name: Install dependencies
-      #   run: pip install jinja2
+      - name: Install dependencies
+        run: pip install jinja2
       
       - name: build CV using docker image
         run: |
@@ -45,7 +37,7 @@ jobs:
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/docker-texlive-full make
 
       - name: copy cv.pdf to root
-        run: cp Awesome-CV/examples/cv.pdf cv.pdf  
+        run: cp Awesome-CV/examples/cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf  
 
       # - name: Run json_to_tex.py
         # run: |
@@ -68,7 +60,7 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           # filename: ${{ github.event.client_payload.ref_name }}.txt
-          filename: cv.pdf
+          filename: JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf
           credentials: ${{ secrets.GOOGLE_DRIVE }}
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           overwrite: true

@@ -44,8 +44,8 @@ jobs:
           ls -la Awesome-CV
           cd Awesome-CV
           # docker run --rm -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
-          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive tlmgr install roboto
-          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
+          # docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive tlmgr install roboto
+          docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasWeise/docker-texlive-full make
           cp examples/cv.pdf ../../cv.pdf
 
       # - name: Run json_to_tex.py

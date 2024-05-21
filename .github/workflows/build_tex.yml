@@ -36,12 +36,12 @@ jobs:
       #     python-version: 3.12.2
       #     cache: pip
   
-      - name: Install dependencies
-        run: pip install jinja2
+      # - name: Install dependencies
+      #   run: pip install jinja2
       
       - name: build CV using docker image
         run: |
-          ls -la
+          ls -la Awesome-CV
           cd Awesome-CV
           docker run --rm -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
           # docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make

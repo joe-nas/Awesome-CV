@@ -40,7 +40,8 @@ jobs:
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          filename: JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_coverletter.pdf
+          # filename: JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_coverletter.pdf
+          filename: '*.pdf'
           credentials: ${{ secrets.GOOGLE_DRIVE }}
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           overwrite: true

@@ -41,7 +41,7 @@ jobs:
       
       - name: build CV using docker image
         run: |
-          ls -la
+          echo $(ls)
           cd Awesome-CV
           docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
           cp examples/cv.pdf ../../cv.pdf

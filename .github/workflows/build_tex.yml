@@ -21,16 +21,10 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: joe-nas/cv_automation
           path: cv_automation
-
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: 3.12.2
-      #     cache: pip
   
-      - name: Install dependencies
+      - name: Install python dependencies
         run: pip install jinja2
-      
+
       - name: build CV using docker image
         run: |
           cd Awesome-CV
@@ -39,27 +33,9 @@ jobs:
       - name: copy cv.pdf to root
         run: cp Awesome-CV/examples/cv.pdf JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf  
 
-      # - name: Run json_to_tex.py
-        # run: |
-          # echo 🎃🎃🎃🎃
-          # # cp -r cv_automation/data Awesome-CV
-          # cd Awesome-CV
-          # mkdir output
-          # # python json_to_tex.py
-          # echo 🎃🎃executed json_to_tex🎃🎃about:blank#blocked
-          # # mv output/*.tex examples/cv
-          # ls -la examples
-          # chmod -R 777 .
-          # docker run --rm --user $(id -u):$(id -g) -i -w "/doc" -v "$PWD":/doc thomasweise/texlive make
-          # echo '${{ toJSON(github.event) }}'
-
-      # - name: Create Test File
-      #   run: echo ${{ github.event.client_payload.ref_name }} > ${{ github.event.client_payload.ref_name }}.txt
-
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          # filename: ${{ github.event.client_payload.ref_name }}.txt
           filename: JonasFalck_${{ github.event.client_payload.ref_name }}_cv.pdf
           credentials: ${{ secrets.GOOGLE_DRIVE }}
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}

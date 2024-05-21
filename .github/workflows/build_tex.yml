@@ -23,7 +23,7 @@ jobs:
           path: cv_automation
   
       - name: Install python dependencies
-        run: pip install jinja2about:blank#blocked
+        run: pip install jinja2
 
       - name: build CV using docker image
         run: |
